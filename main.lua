@@ -1,15 +1,31 @@
-function searchNewCommands(res)
-    local comandos = {}
-    local cmd = getCommandHandlers(res)
-    for _, v in ipairs(cmd) do
-        if not comandos[getResourceName(res)] then
-            comandos[getResourceName(res)] = "/"..v
-        else
-            comandos[getResourceName(res)] = comandos[getResourceName(res)].."\n/"..v
+function searchNewCommands(res, type)
+    if type == 1 then
+        local comandos = {}
+        local cmd = getCommandHandlers(res)
+        for _, v in ipairs(cmd) do
+            if not comandos[getResourceName(res)] then
+                comandos[getResourceName(res)] = "/"..v
+            else
+                comandos[getResourceName(res)] = comandos[getResourceName(res)].."\n/"..v
+            end
         end
-    end
-    if comandos[getResourceName(res)] then
-        sendDiscordMessage("Novos Comandos Adicionados:", "**Resource:**\n`"..getResourceName(res).."`\n**Comandos:**\n`"..comandos[getResourceName(res)].."`")
+        if comandos[getResourceName(res)] then
+            sendDiscordMessage("Novos Comandos Adicionados:", "**Resource:**\n`"..getResourceName(res).."`\n**Comandos:**\n`"..comandos[getResourceName(res)].."`")
+        end
+
+    elseif type == 2 then
+        local comandos = {}
+        local cmd = getCommandHandlers(res)
+        for _, v in ipairs(cmd) do
+            if not comandos[getResourceName(res)] then
+                comandos[getResourceName(res)] = "/"..v
+            else
+                comandos[getResourceName(res)] = comandos[getResourceName(res)].."\n/"..v
+            end
+        end
+        if comandos[getResourceName(res)] then
+            sendDiscordMessage("Comandos Removidos:", "**Resource:**\n`"..getResourceName(res).."`\n**Comandos:**\n`"..comandos[getResourceName(res)].."`")
+        end
     end
 end
 
